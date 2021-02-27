@@ -20,15 +20,24 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 /* ROUTES */
-app.get('/v1/api/colors', (req, res) => {
-    db.color.findAll().status(200)
-        .then((colors) => res.send({ colors: colors }));
+app.get('/v1/api/colors', async (req, res) => {
+    try {
+        const colors = await db.color.findAll()
+        res.send({ colors: colors });
+    } catch (err) {
+        console.error(err);
+    }
 });
 
-app.get('/v1/api/colors/:id', (req, res) => {
-    db.color.findOne({
-        where: {
-            id: req.params.id,
-        },
-    }).then((colors) => res.send({ colors: colors }));
+app.get('/v1/api/colors/:id', async (req, res) => {
+    try {
+        const colors = await db.color.findOne({
+            where: {
+                id: req.params.id,
+            },
+        });
+        res.send({ colors: colors });
+    } catch (err) {
+        console.error(err);
+    }
 });
