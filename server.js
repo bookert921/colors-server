@@ -1,13 +1,14 @@
 /* MODULES */
 require('dotenv').config();
 const express = require('express');
-const db = require('./models');
+const routes = require('./routes');
 const cors = require('cors');
 
 /* APP CONNECTION */
+const port = process.env.PORT || 5000;
 const app = express();
-app.listen(5000, () => {
-    console.log('connected');
+app.listen(port, () => {
+    console.log(`connected on port ${port}...`);
 });
 
 /* MIDDLEWARE */
@@ -20,24 +21,4 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 /* ROUTES */
-app.get('/v1/api/colors', async (req, res) => {
-    try {
-        const colors = await db.color.findAll()
-        res.send({ colors: colors });
-    } catch (err) {
-        console.error(err);
-    }
-});
-
-app.get('/v1/api/colors/:id', async (req, res) => {
-    try {
-        const colors = await db.color.findOne({
-            where: {
-                id: req.params.id,
-            },
-        });
-        res.send({ colors: colors });
-    } catch (err) {
-        console.error(err);
-    }
-});
+app.use('/api/v1/colors', routes.colors);
