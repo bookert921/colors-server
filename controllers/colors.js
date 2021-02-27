@@ -3,8 +3,8 @@ const db = require('../models');
 const index = async (req, res) => {
     try {
         const colors = await db.color.findAll({
-            attributes: ['color_name', 'hex_value'],
-            limit: 10,
+            attributes: ['id', 'color_name', 'hex_value'],
+            limit: 100,
         });
         res.json({ colors: colors });
     } catch (err) {
