@@ -1,4 +1,4 @@
-/* LIBRARIES and MODULES */
+/* LIBRARIES */
 require('dotenv').config();
 const express = require('express');
 const routes = require('./routes');
@@ -14,9 +14,11 @@ app.listen(port, () => {
 /* MIDDLEWARE */
 app.use(require('morgan')('dev')); // Logger
 app.use(express.json({ type: 'application/json' })); // JSON Parser
-app.use(cors());
-// const corsOptions = {
-//     origin: 'https://booker-showers.dev'
-// }
+const corsOptions = {
+    origin: 'http://localhost:3000',
+    optionsSuccessStatus: 200
+}
+app.use(cors(corsOptions));
+
 /* ROUTES */
 app.use('/api/v1/colors', routes.colors);
