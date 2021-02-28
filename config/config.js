@@ -9,9 +9,6 @@ module.exports = {
     dialect: "postgres"
   },
   production: {
-    username: "book",
-    password: process.env.PGPASS,
-    database: "color_ref",
     host: process.env.DATABASE_URL,
     dialect: "postgres"
   }
