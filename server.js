@@ -1,4 +1,4 @@
-/* MODULES */
+/* LIBRARIES and MODULES */
 require('dotenv').config();
 const express = require('express');
 const routes = require('./routes');
@@ -14,11 +14,7 @@ app.listen(port, () => {
 /* MIDDLEWARE */
 app.use(require('morgan')('dev')); // Logger
 app.use(express.json({ type: 'application/json' })); // JSON Parser
-const corsOptions = {
-    origin: 'http://localhost:3000', // Change to client-side address
-    optionsSuccessStatus: 200
-}
-app.use(cors(corsOptions));
+app.use(cors());
 
 /* ROUTES */
 app.use('/api/v1/colors', routes.colors);
