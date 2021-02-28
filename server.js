@@ -15,6 +15,8 @@ app.listen(port, () => {
 app.use(require('morgan')('dev')); // Logger
 app.use(express.json({ type: 'application/json' })); // JSON Parser
 app.use(cors());
-
+// const corsOptions = {
+//     origin: 'https://booker-showers.dev'
+// }
 /* ROUTES */
 app.use('/api/v1/colors', routes.colors);
